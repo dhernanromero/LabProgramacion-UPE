@@ -1,0 +1,8 @@
+#divPrueba{
+  margin: 20px;
+  border: 1px solid black;
+  outline: 4px solid red;
+  outline-offset: 15px;
+  resize: horizontal;
+  overflow: auto;
+}

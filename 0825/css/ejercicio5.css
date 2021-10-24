@@ -1,0 +1,15 @@
+body{
+    background-color: blueviolet;
+}
+
+a:hover{
+    color:red;
+}
+
+a{
+    color: yellow
+}
+
+a:visited{
+    color: green;
+}

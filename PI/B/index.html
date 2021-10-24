@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/estilos.css">
+    <script src="js/main.js" language="javascript" type="text/javascript" ></script>
+</head>
+    <body>
+        <h1>Laboratorio de progamacion</h1>
+        <h3>Listado de Alumnos</h3>
+        <div class="container">
+            <table class="table table-striped" id="tablaAlumnos">
+                <thead>
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Tipo Documento</th>
+                    <th scope="col">Nro Documento</th>
+                    <th scope="col">Nota 1er Parcial</th>
+                    <th scope="col">Nota 2do Parcial</th>
+                    <th scope="col">Nota Rec 1er Parcial</th>
+                    <th scope="col">Nota Rec 2do Parcial</th>
+                    <th scope="col">Nota Final</th>
+                    <th scope="col">Nota Resultado</th>
+                </tr>
+                </thead>
+                <tbody id="tbody">
+                <tr>
+                    <td>Diego Romero</th>
+                    <td>DNI</td>
+                    <td>36605300</td>
+                    <td>7</td>
+                    <td>7</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>7</td>
+                    <td>PROMOCIONA</td>
+                </tr>
+                <tr>
+                    <td>Pablo Rozek</th>
+                    <td>DNI</td>
+                    <td>36605300</td>
+                    <td>7</td>
+                    <td>7</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>7</td>
+                    <td>PROMOCIONA</td>
+                </tr>
+                <tr>
+                    <td>Nicolas Ramirez</th>
+                    <td>DNI</td>
+                    <td>36605300</td>
+                    <td>7</td>
+                    <td>7</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>7</td>
+                    <td>PROMOCIONA</td>
+                </tr>
+                </tbody>
+            </table>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" id="btnAgregarAlumno" data-toggle="modal" data-target="#agregarAlumnoModal">Agregar Alumno</button>
+            <button type="button" id="btn_ordenar" class="btn btn-primary ">Ordenar tabla</button>
+            
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="errorMensajeModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-warning">
+                        <h5 class="modal-title">ALERTA!</h5>
+                        <button id="cerrar-modal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Algunos datos no se ingresaron correctamente</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="btn-aceptar-modal" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="agregarAlumnoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <form class="oculto" id="formRevision">
+                                <div class="form-group">
+                                <label for="Nombre" id="lblNombre" class="col-xs-12 col-sm-12 col-md-4 col-lg-4 from-label">Nombre</label>
+                                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                    <input type="text" class="form-control" id="nombre" aria-describedby="" placeholder="Nombre" max="30" required>
+                                    <div class="invalid-feedback" id="error_nombre">
+                                        Insgrese nombre completo del alumno
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label for="TipoDocumento" id="lblTipoDoc" class="col-xs-12 col-sm-12 col-md-8 col-lg-8 from-label">Tipo Documento</label>
+                                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                            <!-- <input type="time" class="form-control" id="horainicio"> -->
+                                            <select class="form-control col-md-12 col-lg-12 custom-select" id="selectGrup">
+                                                <option value="0" selected>Seleccione</option>
+                                                <option value="1">DNI</option>
+                                                <option value="2">LC/LE</option>
+                                            </select>
+                                            <div id="error_tipo_documento" class="invalid-feedback">
+                                                Debe elegir un tipo de documento
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="nroDocumento" id="lblNrooDoc" class="col-xs-12 col-sm-12 col-md-8 col-lg-8 from-label">Nro de Documento</label>
+                                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                            <input type="text" class="form-control" id="numeroDocumento">
+                                             <div class="invalid-feedback">
+                                                El numero ingresado no es valido
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label for="notaPrimerParcial" id="lblPriParcial" class="col-xs-12 col-sm-12 col-md-8 col-lg-8 from-label">Nota Primer Parcial</label>
+                                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                            <input type="number" class="form-control" id="primerParcial" min="1" max="10" required>
+                                             <div class="invalid-feedback">
+                                                La nota debe ser en entre 1 y 10
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="notaSegundoParcial" id="lblSegParcial" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 from-label">Nota Segundo Parcial</label>
+                                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                            <input type="number" class="form-control" id="segundoParcial" min="1" max="10" required>
+                                             <div class="invalid-feedback">
+                                                La nota debe ser en entre 1 y 10
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label for="notaPrimerRecuperatorio" id="lblPriRec" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 from-label">Nota Primer Recuperatorio</label>
+                                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                            <input type="number" class="form-control" id="primerRecuperatorio" min="1" max="10">
+                                            <div class="invalid-feedback">
+                                                La nota debe ser en entre 1 y 10
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="notaSegundoParcial" id="lblSecRec" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 from-label">Nota Segundo Recuperatorio</label>
+                                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                            <input type="number" class="form-control" id="segundoRecuperatorio" min="1" max="10">
+                                            <div class="invalid-feedback">
+                                                La nota debe ser en entre 1 y 10
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="">
+                                    <button type="submit" class="btn btn-primary" id="guardar">Guardar</button>
+                                    <button type="button" class="btn btn-secundary" id="test">Prueba Revision</button>
+                                </div> -->
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="cancelarModal" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" id="guardarAlumno">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

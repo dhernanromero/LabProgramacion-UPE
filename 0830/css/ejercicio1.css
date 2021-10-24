@@ -1,0 +1,28 @@
+h1{
+    text-align: center;
+}
+
+img{
+    padding-left: 38%;
+    width: 300px;
+    height: 200px;
+}
+
+.textos{
+    padding-left: 15%;
+}
+
+.bloques{
+    border: 1px;
+    display: inline-block;
+    width: 200px;
+    margin: 50px;
+    padding: 20px, 20px;
+    text-align: justify;
+}
+
+@media screen and (max-width: 600px) {
+    .ocultar-en-cel {
+      display: none;
+    }
+  }

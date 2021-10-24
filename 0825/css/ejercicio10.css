@@ -1,0 +1,13 @@
+
+@keyframes example {
+    from {color: yellow;}
+    to {color: green;}
+  }
+
+  p{
+    width: 100px;
+    height: 100px;
+    animation-name: example;
+    animation-duration: 6s;
+  }
+
