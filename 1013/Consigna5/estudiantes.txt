@@ -1,0 +1,6 @@
+Diego,Romero,30000000,Software
+Gabriel,Ojeda,31000000,Logistica
+Lucas,Ramirez,36458199,Software
+Matias,Ojeda,35468454,Seguridad e Higene
+Laura,Cadiz,37125215,Software
+Marcelo,Mosquera,36458191,Software

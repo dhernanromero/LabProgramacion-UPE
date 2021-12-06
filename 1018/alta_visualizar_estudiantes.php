@@ -21,7 +21,7 @@
                 </thead>
                 <tbody>
                     <?php
-                         $ruta_archivo = "C:\\xampp\\htdocs\\LabProgramacion-UPE\\1013\\Consigna5\\estudiantes.txt";
+                         $ruta_archivo = "C:\\xampp\\htdocs\\lab-prog2021\\1013\\Consigna3\\estudiantes.txt";
                          $archivo = fopen($ruta_archivo, "r");
                         //  $datos = fread($archivo, filesize($ruta_archivo));
                         //  $datos_array = array(file($ruta_archivo));
@@ -48,7 +48,7 @@
                 </tbody>
             </table>
             <!-- Button trigger modal -->
-            <button id="btnAgregar" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Agregar</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Launch demo modal</button>
         </div>
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
             <div class="modal-dialog" role="document">
@@ -60,7 +60,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="oculto" id="formDatos" action="alta_visualizar_estudiantes.php" method="POST" >
+                    <form class="oculto" id="formDatos" action="alta_estudiante.php" method="POST" >
                         <div class="form-group">
                             <label for="Nombre" id="lblNombre" class="col-xs-12 col-sm-12 col-md-4 col-lg-4 from-label">Nombre</label>
                             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
@@ -104,10 +104,11 @@
                         </div>
                     </form>
                 </div>
-                <!-- <div class="modal-footer">
+                <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                </div> -->
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+                </div>
             </div>
         </div>
         <?php
@@ -119,9 +120,23 @@
                     $documento = $_POST["documento"];
                     $carrera = $_POST["carrera"];
 
-                    $archivo = fopen("estudiantes.txt", "a+");
-                    fwrite($archivo,"\n");
-                    fwrite($archivo, $nombre.",".$apellido.",".$documento.",".$carrera);
+                    $servername = "localhost";$user= "username";$pass= "password"; $dbname ="myDBPDO";
+                    try 
+                    {
+                        $conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $user,
+                        $pass);
+                        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                        $sql = "INSERT INTO MyGuests (firstname, lastname, email)
+                        VALUES ('John', 'Doe', 'john@example.com')";
+                        // use exec() because no results are returned
+                        $conn->exec($sql);
+                        echo "New record created successfully";
+                    }
+                    catch(PDOException $e)
+                    {
+                     echo $sql . "<br>" . $e->getMessage();
+                    }
+                    $conn = null;
                     
                     // //read the first line of the file and echo
                     // fseek($archivo, 0);
